@@ -1,15 +1,22 @@
 ## Bem vindo a página de testes após o deploy;
 
-You can use the [editor on GitHub](https://github.com/Bertunes/todo.github.io/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+### Gilvan!!!
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Criei isso aqui só para testar essa funcionalidade do github pages.
 
 ```markdown
-Apenas testes da tecnologia.
+Fala mano!
+Bem vindo a página de testes.
+Se quiser seguir é bem tranquilo.
+
+1 -baixa o git e instala na sua máquina - https://git-scm.com/download/win
+
+Após isso, você pode seguir esse tutorial, para  você conseguir usar o terminal do git no VSCODE, sem usar o vi: https://blog.geekhunter.com.br/visual-studio-code-como-editor-do-git/
+
+Depois, só seguir esse tutorial : https://pages.github.com/
+
+E pronto!
+Terá uma página estilo essa kkkkkk
 ```
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
