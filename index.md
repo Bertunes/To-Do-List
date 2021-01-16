@@ -24,65 +24,16 @@ Lembrando que dá para botar qualquer coisa aqui.
 ```
 
 
-<div class="🐕">
-  <div class="torso">
-    <div class="fur">
-      <div class="spot"></div>
-    </div>
-    <div class="neck">
-      <div class="fur"></div>
-      <div class="head">
-        <div class="fur">
-          <div class="snout"></div>          
-        </div>
-        <div class="ears">
-          <div class="ear">
-            <div class="fur"></div>
-          </div>
-          <div class="ear">
-            <div class="fur"></div>
-          </div>
-        </div>
-        <div class="eye"></div>
-      </div>
-      <div class="collar">
-        
-      </div>
-    </div>
-    <div class="legs">
-      <div class="leg">
-        <div class="fur"></div>
-        <div class="leg-inner">
-          <div class="fur"></div>
-        </div>
-      </div>
-      <div class="leg">
-        <div class="fur"></div>
-        <div class="leg-inner">
-          <div class="fur"></div>
-        </div>
-      </div>
-      <div class="leg">
-        <div class="fur"></div>
-        <div class="leg-inner">
-          <div class="fur"></div>
-        </div>
-      </div>
-      <div class="leg">
-        <div class="fur"></div>
-        <div class="leg-inner">
-          <div class="fur"></div>
-        </div>
-      </div>
-    </div>
-    <div class="tail">
-      <div class="tail">
-        <div class="tail">
-          <div class="tail -end">
-            <div class="tail">
-              <div class="tail">
-                <div class="tail">
-                  <div class="tail"></div>
+<div class="dog">
+  <div class="dog-body">
+    <div class="dog-tail">
+      <div class="dog-tail">
+        <div class="dog-tail">
+          <div class="dog-tail">
+            <div class="dog-tail">
+              <div class="dog-tail">
+                <div class="dog-tail">
+                  <div class="dog-tail"></div>
                 </div>
               </div>
             </div>
@@ -91,5 +42,20 @@ Lembrando que dá para botar qualquer coisa aqui.
       </div>
     </div>
   </div>
+  <div class="dog-torso"></div>
+  <div class="dog-head">
+    <div class="dog-ears">
+      <div class="dog-ear"></div>
+      <div class="dog-ear"></div>
+    </div>
+    <div class="dog-eyes">
+      <div class="dog-eye"></div>
+      <div class="dog-eye"></div>
+    </div>
+    <div class="dog-muzzle">
+      <div class="dog-tongue"></div>
+    </div>
+  </div>
 </div>
 
+<div class="ball" tabindex="0"></div>

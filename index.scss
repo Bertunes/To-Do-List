@@ -1,573 +1,430 @@
-:root {
-    --color-fur: #ffb141;
-    --color-fur-dark: #F5832C;
-    --color-spot: #F9584C;
-    --color-snout: #544258;
-    --color-collar: #3EAB6C;
-    --duration: .7s;
-    --semi-duration: calc(var(--duration) / 2);
-    --easing: cubic-bezier(.5, 0, .5, 1);
-    --stagger: calc(-1 * var(--semi-duration) / 2);
-  }
+$dog-width: 100px;
+$interval: 200ms;
+$color-gray: #EAEBEC;
+$easing: ease-in-out;
+
+.ball {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-top: 4rem;
+  z-index: 0;
   
-  *, *:before, *:after {
-    animation-timing-function: var(--easing) !important ;
-  }
-  
-  [class="🐕"] {
+  &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    box-shadow: inset 0 -8px 0 0 rgba(black, 0.2);
+    background: #6E64F0;
     z-index: 1;
-    height: 300px;
-    width: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  }
+  
+  &:focus {
+    outline: none;
     
-    * {
-      position: absolute;
-      will-change: transform;
+    &:after {      
+      animation: bounce $interval * 2 infinite alternate;
+    }
+    
+    @keyframes bounce {
+      from {
+        transform: scale(2);
+        animation-timing-function: ease-in;
+      }
+      to {
+        transform: scale(0.8);
+        animation-timing-function: cubic-bezier(0, 0, 0, 1);
+      }
+    }
+    
+    @keyframes bounce-shadow {
+      from {
+        transform: scale(2.5, 2.6) translateY(-50%);
+        animation-timing-function: ease-in;
+      }
+      to {
+        transform: scale(0.5) translateY(0);
+        animation-timing-function: cubic-bezier(0, 0, 0, 1);
+      }
     }
     
     &:before {
       content: '';
       position: absolute;
-      bottom: percentage(40px / 300px);
+      display: block;
+      top: 0;
       left: 0;
       width: 100%;
-      height: percentage(10px / 300px);
-      background-color: #D3D1D1;
-      border-radius: 2px;
-      animation: shadow
-        calc(1 * var(--semi-duration))
-        infinite;
-      
-      @keyframes shadow {
-        from, to {
-          transform: scaleX(.75)
-        }
-        45%, 55% {
-          transform: scaleX(.5)
-        }
-      }
-    }
-  }
-  
-  .neck {
-    width: 50%;
-    height: 100px;
-    right: -5px;
-    bottom: calc(100% - 10px);
-    transform-origin: center bottom;
-    transform: rotate(15deg);
-    z-index: 2;
-    
-    > .fur {
-      border-bottom-left-radius: 10px;
       height: 100%;
-      width: 100%;
-      
-      &:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 50px;
-        width: 100%;
-        background-color: var(--color-fur-dark);
-        z-index: 1;
-        transform-origin: right bottom;
-        transform: rotate(15deg);
-      }
-    }
-  }
-  
-  .collar {
-    width: calc(100% + 10px);
-    height: 15%;
-    background-color: var(--color-collar);
-    left: -5px;
-    bottom: 30px;
-    border-radius: 5px;
-    animation: collar var(--semi-duration) calc(var(--semi-duration) / 4) infinite;
-    z-index: 2;
-    
-    @keyframes collar {
-      from, to {
-        transform: none;
-      }
-      50% {
-        transform: translateY(-25%);
-      }
-    }
-    
-    &:after {
-      content: '';
-      width: 18%;
-      height: 120%;
       border-radius: 50%;
-      background: var(--color-snout);
-      position: absolute;
-      right: 0%;
-      top: 110%;
-      transform-origin: center top;
-      animation: tag var(--semi-duration) infinite both;
-      
-      @keyframes tag {
-        from, to {
-          transform: rotate(-15deg);
-        }
-        50% {
-          transform: rotate(-15deg) scaleY(1.5);
-        }
-      }
+      background: rgba(black, 0.05);
+      animation: bounce-shadow $interval * 2 infinite alternate;
+      z-index: -10;
     }
   }
+}
+
+.dog {
+  width: $dog-width;
+  height: $dog-width;
+  z-index: 1;
   
-  .head {
-    height: 80%;
-    width: 145%;
-    left: -2%;
-    bottom: 50%;
-    transform-origin: left center;
-    z-index: 2;
-    animation: head var(--semi-duration) calc(var(--semi-duration) / 4) infinite;
-    
-    @keyframes head {
-      from, to {
-        transform: rotate(-10deg);
-      }
-      50% {
-        transform: rotate(-15deg);
-      }
-    }
-    
-    > .fur {
-      height: 100%;
-      width: 100%;
-      border-bottom-right-radius: 80px;
-      
-      &:before {
-        content: '';
-        position: absolute;
-        top: -80%;
-        left: -30%;
-        width: 100%;
-        height: 0;
-        padding-top: 100%;
-        background-color: var(--color-spot);
-        z-index: 1;
-        border-radius: 50%;
-      }
-    }
-  }
-  
-  .snout {
-    --color: var(--color-snout);
-    width: 25%;
-    height: 0;
-    padding-top: 25%;
-    background-color: var(--color);
-    top: 0;
-    right: -5px;
-    border-bottom-left-radius: 100%;
-    z-index: 1;
-  }
-  
-  .ears {
-    bottom: 40%;
-    height: 100%;
-    width: 30%;
-    left: 0;
-    z-index: -1;
-  }
-  
-  .ear {
-    --color: var(--color-spot);
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
     width: 100%;
     height: 100%;
-    bottom: 0;
-    left: 0;
-    transform-origin: left bottom;
-    transform: rotate(-10deg);
-    animation: ear-front calc(var(--duration) / 2) infinite;
-    
-    @keyframes ear-front {
-      50% {
-        transform: rotate(-15deg);
-      }
-    }
-    
-      &:before {
-        content: '';
-        position: absolute;
-        height: 25px;
-        width: 15px;
-        z-index: 2;
-        top: -2px;
-        right: -7px;
-        border-top-left-radius: 100%;
-        border-width: 2px;
-        border-color: transparent;
-        border-style: solid;
-        border-left: 2px solid var(--color-snout);
-        transform-origin: bottom left;
-        animation: ear-mark var(--semi-duration) calc(-1 * var(--semi-duration)) infinite;
-        
-        @keyframes ear-mark {
-          from, to {
-            transform: rotate(0deg);
-          }
-          50% {
-            transform: rotate(25deg);
-          }
-        }
-      }
-    
-    > .fur {
-      border-top-left-radius: 100%;
-      height: 100%;
-      width: 100%;
-    }
-    
-    &:nth-child(2) {
-      left: 15px;
-      bottom: 5px;
-      transform: rotate(-5deg);
-      --color: var(--color-fur);
-      z-index: -1;
-      animation: ear-back calc(var(--duration) / 2) infinite both;
-      
-      @keyframes ear-back {
-        from, to {
-          transform: rotate(0deg);
-        }
-        50% {
-          transform: rotate(-10deg);
-        }
-      }
-    }
-  }
-  
-  .eye {
-    --size: 6%;
-    --color: var(--color-snout);
-    width: var(--size);
-    height: 0;
-    padding: var(--size);
-    left: 35%;
-    top: 20%;
     border-radius: 50%;
-    background-color: var(--color);
-    z-index: 1;
-    
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background-color: var(--color);
-      z-index: 1;
-    }
-    
-    &:after {
-      content: '';
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      left: -50%;
-      top: -50%;
-      border-top-left-radius: 100%;
-      border-width: 2px;
-      border-color: var(--color);
-      border-style: solid;
-      border-bottom-color: var(--color-spot);
-      border-right-color: var(--color-spot);
-      transform: scale(1.25);
-      z-index: 0;
+    background: rgba(black, 0.03);
+    transform: translateY(-30%) scale(1.5);
+  }
+  
+  * {
+    position: absolute;
+  }
+}
+
+.dog-body {
+  top: -50%;
+  animation: dog-body $interval $easing infinite alternate;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 90%;
+    right: 50%;
+    width: 90%;
+    height: 90%;
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 10%;
+    border-top-right-radius: 10%;
+    background: rgba(white, 0.4);
+    // transform: rotate(45deg);
+    transform-origin: right bottom;
+    animation: dog-tail-blur $interval $interval / 6 $easing infinite alternate both;
+  
+    @keyframes dog-tail-blur {
+      from {
+        transform: rotate(0);
+        opacity: 0;
+      }
+      50% {
+        // transform: rotate(45deg);
+        opacity: 1;
+      }
+      to {
+        transform: rotate(90deg);
+        opacity: 0;
+      }
     }
   }
   
-  .torso {
-    width: percentage(170px / 300px);
-    height: percentage(100px / 300px);
-    animation: torso var(--semi-duration) both infinite;
-    
-    @keyframes torso {
-      from, to {
-        transform: none;
-      }
-      50% {
-        transform: translateY(15%);
-      }
+  @keyframes dog-body {
+    from {
+      transform: translateX(-10%);
     }
-    
-    > .fur {
-      height: 100%;
-      width: 185px;
-      border-top-left-radius: 40px;
-      transform-origin: left center;
-      transform: rotate(-20deg) translateY(10px);
-      z-index: 1;
-      
-      &:after {
-        height: 100%;
-        width: 100%;
-        border-bottom-left-radius: 200px 85px;
-        border-bottom-right-radius: 100px;
-      }
+    to {
+      transform: translateX(10%);
     }
-    
-    > .legs {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+  }
+}
+
+.dog-head {
+  animation: dog-head $interval * 9 cubic-bezier(0.11, 0.79, 0, 0.99) infinite;
+  
+  @keyframes dog-head {
+    from, to {
+      transform: rotate(45deg);
     }
-    
-    .spot {
-      width: 120px;
-      height: 120px;
-      bottom: 40px;
-      left: -20px;
-      border-radius: 50%;
-      background-color: var(--color-spot);
-      z-index: 1;
-      animation: spot var(--duration) calc(-1 * var(--semi-duration)) both infinite;
-      
-      @keyframes spot {
-        from, 66%, to {
-          transform: none;
-        }
-        33% {
-          transform: translateX(10px);
-        }
-      }
-      
-      &:after {
-        content: '';
-        height: 20px;
-        width: 20px;
-        border-radius: 50%;
-        background-color: inherit;
-        position: absolute;
-        bottom: -10px;
-        right: 5px;
-      }
-    }
-    
-    > .tail {
-      --color: var(--color-spot);
-      bottom: calc(100% - 15px);
-      left: 0;
-      transform-origin: center bottom;
+    33.3% {
       transform: rotate(-45deg);
     }
+    66.6% {
+      transform: rotate(0);
+    }
+  }
+}
+
+.dog-torso {
+  top: -20%;
+  animation: dog-torso $interval $easing infinite alternate-reverse;
+  
+  @keyframes dog-torso {
+    from {
+      transform: translateX(-5%);
+    }
+    to {
+      transform: translateX(5%);
+    }
+  }
+}
+
+.dog-eyes {
+  width: 60%;
+  top: 55%;
+  left: 20%;
+  z-index: 1;
+  
+  &:before {
+    content: '';
+    display: block;
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    position: absolute;
+    background: orange;
+    top: -10px;
+    left: -10px;
+    z-index: 0;
+    border: 4px solid white;
+    border-left-width: 0;
+    border-bottom-width: 0;
+    border-top-width: 0;
+    transform: rotate(-45deg);
+  }
+}
+
+.dog-eye {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #000;
+  z-index: 1;
+  animation: dog-eye $interval * 9 infinite;
+  
+  @keyframes dog-eye {
+    from, to {
+      animation-timing-function: step-end;
+      opacity: 1;
+    }
+    50%, 55% {
+      animation-timing-function: step-start;
+      opacity: 0;
+    }
   }
   
-  .tail {
-    height: 15px;
+  &:first-child {
+    left: 0;
+  }
+  &:last-child {
+    right: 0;
+  }
+}
+
+.dog-muzzle {
+  width: 60%;
+  left: 20%;
+  height: 50%;
+  border-bottom-left-radius: 100%;
+  border-bottom-right-radius: 100%;
+  background: white;
+  bottom: -15%;
+  
+  &:before, &:after {
+    content: '';
+    display: block;
+    position: absolute;
+  }
+  
+  &:before {
+    width: 6px;
+    height: 20px;
+    bottom: 0;
+    left: calc(50% - 3px);
+    background: $color-gray;
+  }
+  
+  &:after {
+    background: black;
     width: 20px;
-    background-color: var(--color);
-    border-top-right-radius: 10px 100%;
-    border-top-left-radius: 10px 100%;
-    animation: tail var(--semi-duration) infinite;
-    
-    @keyframes tail {
-      from, to {
-        transform: rotate(-45deg) translateX(-15%);
-      }
-      50% {
-        transform: rotate(-25deg) translateX(15%);
-      }
+    height: 15px;
+    bottom: 12px;
+    left: calc(50% - 10px);
+    border-bottom-left-radius: 60% 60%;
+    border-bottom-right-radius: 60% 60%;
+    border-top-left-radius: 50% 40%;
+    border-top-right-radius: 50% 40%;
+  }
+}
+
+@function p($v) {
+  @return percentage($v);
+}
+
+.dog-tongue {
+  width: 40px;
+  height: 100%;
+  left: calc(50% - 20px);
+  z-index: -1;
+  transform-origin: center top;
+  animation: dog-tongue $interval * 9 -50ms ease-in-out infinite;
+  
+  @keyframes dog-tongue {
+    from, to {
+      transform: rotate(0);
     }
-    
-    > .tail {
-      bottom: calc(90%);
-      transform-origin: bottom left;
-      transform: rotate(-10deg) translateY(50%) scaleX(.8) scaleY(.9);
-      animation: tail-inner var(--semi-duration) var(--stagger) infinite;
-      
-      @keyframes tail-inner {
-        from, to {
-          transform: rotate(-10deg) translateY(50%) scaleX(.8) scaleY(.9);
-        }
-        50% {
-          transform: rotate(5deg) translateY(50%) scaleX(.8) scaleY(.9)
-        }
-      }
+    #{p(1/6)} {
+      transform: rotate(30deg);
+    }
+    #{p(2/6)}, #{p(4/6)} {
+      transform: rotate(0);
+    }
+    #{p(3/6)}, #{p(5/6)} {
+      transform: rotate(-20deg);
     }
   }
   
-  .legs {
-    > .leg {
-      bottom: 5px;
-      --color: var(--color-fur);
-    }
-    
-    > .leg:nth-child(1), .leg:nth-child(3) {
-      // top: calc(100% - 65px);
-      right: 15px;
-    }
-    
-    > .leg:nth-child(3), > .leg:nth-child(4) {
-      --color: var(--color-fur-dark);
-      z-index: -1;
-    }
-    
-    > .leg:nth-child(1), .leg:nth-child(4) {
-      --delay: 0s;
-    }
-    
-    > .leg:nth-child(2), > .leg:nth-child(3) {
-      --delay: calc(-1 * var(--duration) / 2 )
-    }
-    
-    > .leg:nth-child(2) {
-      left: 0;
-    }
-    
-    > .leg:nth-child(4) {
-      left: 0;
-    }
-  
-  }
-  
-  .leg {
+  &:before {
+    content: '';
     position: absolute;
-    height: 65px;
-    width: 45px;
-    background-color: var(--color);
-    transform-origin: center 5px;
-    // transform: rotate(-10deg);
-    // border-bottom-right-radius: 10px;
-    animation: leg infinite var(--duration) var(--delay, 0s);
-    
-    > .leg-inner {
-      animation: leg-inner infinite
-        var(--duration)
-        calc(var(--delay));
-      transform: rotate(90deg);
-      
-      @keyframes leg-inner {
-        from, to {
-          transform: none;
-        }
-        33% {
-          transform: rotate(70deg);
-        }
-        76% {
-          transform: none;
-        }
-      }
-    }
-    
-    @keyframes leg {
-      from, to {
-        transform: none;
-      }
-      33% {
-        transform: rotate(-55deg);
-      }
-      66% {
-        transform: rotate(-20deg);
-      }
-    }
-  
-    > .fur {
-      width: percentage(65px / 45px);
-      height: 100%;
-  
-      &:after {
-        width: 45px;
-        bottom: 0;
-        top: initial;
-        transform: rotate(15deg);
-        // height: 100%;
-      }
-    }
-  }
-  
-  .fur {
-    position: absolute;
-    overflow: hidden;
-  
-    &:after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 150%;
-      top: 0;
-      left: 0;
-      background-color: var(--color, var(--color-fur));
-      transform-origin: center bottom;
-    }
-  }
-  
-  .leg-inner {
-    position: absolute;
-    height: 65%;
-    width: 100%;
-    // background-color: #FFB141;
-    top: calc(100%);
-    transform-origin: center top;
-  
-    &:before {
-      // joint
-      content: "";
-      width: 45px;
-      height: 45px;
-      background-color: var(--color);
-      // background-color: blue;
-      position: absolute;
-      border-radius: 50%;
-      top: -22.5px;
-    }
-  
-    > .fur {
-      width: 100%;
-      height: 100%;
-  
-      position: absolute;
-      top: 0;
-      left: 0;
-      overflow: hidden;
-  
-      &:after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 150%;
-        top: 0;
-        left: 0;
-        background-color: var(--color);
-        transform-origin: center top;
-        transform: rotate(15deg);
-      }
-    }
-  }
-  
-  html,
-  body {
+    display: block;
     width: 100%;
     height: 100%;
-    margin: 0;
-    padding: 0;
-    background-color: #E3E3E3;
+    border-radius: 40px;
+
+    background: #FD3163;
+    animation: dog-tongue-inner $interval / 2 $easing infinite alternate;
+    
+    @keyframes dog-tongue-inner {
+      from {
+        transform: translateY(5%);
+      }
+      to {
+        transform: translateY(22%);
+      }
+    }
+  }
+}
+
+.dog-ears {
+  width: 40%;
+  top: 25%;
+  left: 30%;
+  animation: dog-ears $interval * 9 $interval / 2 ease infinite;
+  
+  @keyframes dog-ears {
+    42.3%, 71.6% {
+      transform: rotate(-5deg);
+    }
+    50.3%, 79.6% {
+      transform: rotate(5deg);
+    }
+    5% {
+      transform: rotate(5deg);
+    }
+    12% {
+      transform: rotate(-5%);
+    }
+    from, 33.3%, 66%, to {
+      transform: rotate(0);
+    }
+  }
+}
+
+.dog-ear {
+  bottom: -10px;
+  height: 50px;
+  width: 50px;
+  background: $color-gray;
+  animation-duration: $interval * 2;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  
+  &:first-child {
+    border-bottom-left-radius: 80%;
+    border-top-right-radius: 80%;
+    right: 100%;
+    box-shadow: inset -15px 15px 0 1px white;
+    transform-origin: right bottom;
+    transform: rotate(10deg);
   }
   
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  &:last-child {
+    border-top-left-radius: 80%;
+    border-bottom-right-radius: 80%;
+    left: 100%;
+    box-shadow: inset 15px 15px 0 0 white;
+    transform-origin: left bottom;
+    transform: rotate(-10deg);
   }
-  
-  *,
-  *:before,
-  *:after {
-    box-sizing: border-box;
-    position: relative;
+}
+
+.dog-tail {
+  $tail-width: 22px;
+  width: $tail-width;
+  height: $tail-width * 1.1;
+  background: white;
+  bottom: 40%;
+  border-radius: $tail-width / 2;
+  left: calc(50% - #{$tail-width / 2});
+  transform-origin: center bottom;
+
+  .dog-tail {
+    animation: dog-tail-segment $interval $easing infinite alternate;
+    
+    @keyframes dog-tail-segment {
+      from {
+        transform: rotate(-10deg);
+      }
+      to {
+        transform: rotate(10deg);
+      }
+    }
   }
+}
+
+.dog-body > .dog-tail {
+  bottom: 90%;
+  animation: dog-tail $interval $easing infinite alternate;
   
+  @keyframes dog-tail {
+    from {
+      transform: rotate(-45deg);
+    }
+    to {
+      transform: rotate(45deg);
+    }
+  }
+}
+
+.dog-body,
+.dog-torso,
+.dog-head {
+  border-radius: 50%;
+  background: white;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.dog-body, .dog-torso {
+  box-shadow: inset 0 -15px 0 0 $color-gray;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+html, body {
+  background: #FFE16E;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  position: relative;
+}
