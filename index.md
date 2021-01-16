@@ -13,10 +13,13 @@ Se quiser seguir é bem tranquilo.
 
 Após isso, você pode seguir esse tutorial, para  você conseguir usar o terminal do git no VSCODE, sem usar o vi: https://blog.geekhunter.com.br/visual-studio-code-como-editor-do-git/
 
-Depois, só seguir esse tutorial : https://pages.github.com/
+Depois, só seguir esse tutorial : https://guides.github.com/features/pages/ (eu segui esse, mas tbm tem outro) https://pages.github.com/ 
+
+Aí é entrar no vs code, instalar a extenção do "Github" lá, pela loja msm.
+E fazer um clone do seu projeto, utilizando a url do repositorio dele (só clicar lá no repositorio, do lado do nome dele tem um botão verde e pegar o https dele, jogar no vs code fazendo um clone); 
 
 E pronto!
-Terá uma página estilo essa kkkkkk
+Terá uma página estilo essa e o projeto dela no teu pc kkkkkk
 ```
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
